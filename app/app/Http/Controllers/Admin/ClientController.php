@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ClientRequest;
 use App\Models\Client;
 use App\Traits\UploadFile;
-use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
@@ -34,11 +33,6 @@ class ClientController extends Controller
         return view('admin.clients.index', compact('clientsList'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('admin.clients.create');
@@ -59,48 +53,40 @@ class ClientController extends Controller
         return redirect()->route('admin.clients.index')->with('message', 'Client created successfully!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+
+    public function show(int $id)
     {
-        //
+        $client = $this->client->findOrFail($id);
+        return view('admin.clients.show', compact('client'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+
+    public function edit(int $id)
     {
-        //
+        $client = $this->client->findOrFail($id);
+        return view('admin.clients.edit', compact('client'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(ClientRequest $request, int $id)
     {
-        //
+        $client = $this->client->findOrFail($id);
+        $validatedData = $request->validated();
+
+        if ($request->hasFile('image')) {
+            $this->uploadDeleteImage($client->image);
+            $imageName = $this->uploadImage($request->file('image'), 'images');
+            $validatedData['image'] = $imageName;
+        }
+
+        $client->update($validatedData);
+        return redirect()->route('admin.clients.index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        
+        $client = $this->client->findOrFail($id);
+        $this->uploadDeleteImage($client->image);
+        $client->delete();
+        return redirect()->route('admin.clients.index');
     }
 }
