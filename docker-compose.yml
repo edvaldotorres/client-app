@@ -28,7 +28,7 @@ services:
       - mysql-data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: 123456
-      MYSQL_DATABASE: db_api_app
+      MYSQL_DATABASE: db_client_app
     networks:
       principal:
     ports:
