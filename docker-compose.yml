@@ -1,0 +1,41 @@
+version: "3.9"
+services:
+  # Serviço de aplicação web (PHP+NGINX)
+  web:
+    image: php:8.0-fpm-alpine
+    # image: php:8.0-fpm-alpine
+    # Usado para construir uma nova imagem
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    networks:
+      principal:
+    volumes:
+      - ./app/:/var/www/app/
+      - ./docker/nginx/sites:/etc/nginx/sites-available
+    ports:
+      - "80:80" #HTTP
+      - "443:443" #HTTPS
+    depends_on:
+      - mysql
+
+  # Serviço de aplicação MySQL
+  mysql:
+    image: arm64v8/mysql:8.0.29
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: db_api_app
+    networks:
+      principal:
+    ports:
+      - 30000:3306
+
+networks:
+  principal:
+
+volumes:
+  mysql-data:
