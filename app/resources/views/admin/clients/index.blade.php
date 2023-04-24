@@ -7,6 +7,9 @@
                 <div class="card">
                     <div class="card-header">{{ __('Dashboard') }}</div>
                     <div class="card-body">
+                        <div class="d-flex mb-3">
+                            <a href="{{ route('admin.clients.create') }}" class="btn btn-primary mr-2">Criar Novo Cliente</a>
+                        </div>
                         <div class="table-responsive">
                             <table class="table table-striped table-hover">
                                 <thead>
@@ -30,6 +33,8 @@
                                             <td></td>
                                             <td>{{ $clientData->name_social }}</td>
                                             <td>
+                                                <a href="{{ route('admin.clients.show', $clientData->id) }}"
+                                                    class="btn btn-sm btn-success btn-block mb-1 mb-md-0">Visualizar</a>
                                                 <a href="{{ route('admin.clients.edit', $clientData->id) }}"
                                                     class="btn btn-sm btn-primary btn-block mb-1 mb-md-0">Editar</a>
                                                 <form action="{{ route('admin.clients.destroy', $clientData->id) }}"
