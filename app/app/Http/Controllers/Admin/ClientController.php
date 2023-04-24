@@ -162,7 +162,6 @@ class ClientController extends Controller
     public function destroy(int $id): RedirectResponse
     {
         $client = $this->client->findOrFail($id);
-        $this->uploadDeleteImage($client->image);
 
         $client->delete();
         return redirect()->route(self::CLIENTS_INDEX_ROUTE);
