@@ -24,7 +24,6 @@ class Client extends Model
         'name_social',
     ];
 
-
     /**
      * This PHP function formats a date of birth string into a "dd/mm/yyyy" format.
      * 
