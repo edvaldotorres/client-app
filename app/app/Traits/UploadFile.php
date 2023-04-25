@@ -31,12 +31,16 @@ trait UploadFile
     }
 
     /**
-     * Delete the image from the storage
+     * This function deletes an image file from the public storage disk in Laravel.
      * 
-     * @param string path The path to the image to be deleted.
+     * @param path  is a nullable string parameter that represents the path of the image file that
+     * needs to be deleted. If the value of  is not null, the function will delete the image file from
+     * the public disk storage.
      */
-    protected function uploadDeleteImage(string $path): void
+    protected function uploadDeleteImage(?string $path): void
     {
-        Storage::disk('public')->delete('images/' . $path);
+        if ($path !== null) {
+            Storage::disk('public')->delete('images/' . $path);
+        }
     }
 }
