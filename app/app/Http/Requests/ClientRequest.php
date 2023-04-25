@@ -25,7 +25,7 @@ class ClientRequest extends FormRequest
     {
         return [
             'name_client' => 'required|min:3|max:255',
-            'date_of_birth' => 'required|date',
+            'date_of_birth' => 'required|date_format:d/m/Y',
             'document' => 'required|min:11|max:18',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'name_social' => 'nullable|min:3|max:255',
@@ -44,7 +44,7 @@ class ClientRequest extends FormRequest
             'name_client.min' => 'O campo nome deve ter no mínimo 3 caracteres',
             'name_client.max' => 'O campo nome deve ter no máximo 255 caracteres',
             'date_of_birth.required' => 'O campo data de nascimento é obrigatório',
-            'date_of_birth.date' => 'O campo data de nascimento deve ser uma data válida',
+            'date_of_birth.date_format' => 'O campo data de nascimento deve estar no formato dd/mm/aaaa',
             'document.required' => 'O campo documento é obrigatório',
             'document.min' => 'O campo documento deve ter no mínimo 11 caracteres',
             'document.max' => 'O campo documento deve ter no máximo 14 caracteres',
