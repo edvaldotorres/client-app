@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to api-app 👋</h1>
+<h1 align="center">Welcome to client-app 👋</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/php-8.0-blue.svg?cacheSeconds=2592000" />
   <img alt="Version" src="https://img.shields.io/badge/laravel-9.0-red.svg?cacheSeconds=2592000" />
@@ -10,7 +10,7 @@
   </a>
 </p>
 
-> Project developed thinking about using good practices and design patterns, with the objective of the API being consumed in a React JS application. The API follows testing (TDD), dependency injection, docker and other features of the Laravel 9 framework
+> Project boils down to customer crud! Where it follows good practices and RSP recommendations… its main objective is to improve the Laravel framework
 
 ## Prerequisites
 
@@ -21,12 +21,12 @@
 1. Clone your repository, example:
 
 ```sh
-git clone https://github.com/edvaldotorres/api-app.git
+git clone https://github.com/edvaldotorres/client-app.git
 ```
 2. Change directory into the newly created app/project.
 
 ```sh
-cd api-app
+cd client-app
 ```
 3. Run the servers
 
@@ -38,7 +38,7 @@ NOTE: This may take a while if this is the first time installing this as a conta
 4. Install the dependencies
 
 ```sh
-docker exec -it api-app_web_1 /bin/bash
+docker exec -it client-app_web_1 /bin/bash
 ```
 
 NOTE: Create your database according to docker-compose.yml file
@@ -52,9 +52,10 @@ cd app
 ```sh
 php artisan migrate
 ```
+
 ## Usage
 
-1. You can now open your application with API platform: http://localhost/api
+1. You can now open your application with platform: http://localhost
 
 ## Author
 
@@ -66,7 +67,7 @@ php artisan migrate
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/edvaldotorres/api-app/issues). 
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/edvaldotorres/client-app/issues). 
 
 ## Show your support
 
