@@ -30,7 +30,9 @@
                                             <td>{{ $clientData->name_client }}</td>
                                             <td>{{ $clientData->date_of_birth }}</td>
                                             <td>{{ $clientData->document }}</td>
-                                            <td></td>
+                                            <td>
+                                                <img src="{{ $clientData->image ? asset('storage/images/' . $clientData->image) : asset('images/default.png') }}"
+                                                    alt="{{ $clientData->name_client }}" width="50">
                                             <td>{{ $clientData->name_social }}</td>
                                             <td>
                                                 <a href="{{ route('admin.clients.show', $clientData->id) }}"
