@@ -35,17 +35,17 @@ class ClientController extends Controller
     const CLIENTS_INDEX_ROUTE = 'admin.clients.index';
 
     /**
-     * This is a constructor function that sets the value of a class property called "client" to the value
-     * passed as an argument.
+     * This is a constructor function that initializes a client object and applies an authentication
+     * middleware.
      * 
-     * @param Client client The parameter `` is an instance of the `Client` class. It is being
-     * injected into the constructor of another class, which means that the class that is receiving this
-     * parameter can use the methods and properties of the `Client` class. This is an example of dependency
-     * injection, which is a
+     * @param Client client The `` parameter is an instance of the `Client` class that is passed to
+     * the constructor of the current class. It is likely used to make HTTP requests or interact with an
+     * external API.
      */
     public function __construct(Client $client)
     {
         $this->client = $client;
+        $this->middleware('auth');
     }
 
     /**
