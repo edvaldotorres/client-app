@@ -38,13 +38,17 @@ NOTE: This may take a while if this is the first time installing this as a conta
 4. Install the dependencies
 
 ```sh
-docker exec -it client-app_web_1 /bin/bash
+docker exec -it (container) /bin/bash
 ```
 
-NOTE: Create your database according to docker-compose.yml file
+NOTE: Create your database according to docker-compose.yml file & configure your .env file
 
 ```sh
 cd app
+```
+
+```sh
+composer intall
 ```
 
 5. Build the migrate.
