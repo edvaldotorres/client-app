@@ -56,6 +56,13 @@ COPY ./docker/nginx/nginx.conf /etc/nginx/nginx.conf
 # se for necessário criar os sites disponíveis já na confecção da imagem, então descomente a linha abaixo
 # COPY ./docker/nginx/sites /etc/nginx/sites-available
 
+# habilitar o site padrão
+RUN apt-get update && apt-get install -y \
+    nodejs \
+    npm
+
+RUN npm install -g npm@9.5.1
+
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/supervisord.conf"]

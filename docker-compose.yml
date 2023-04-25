@@ -18,6 +18,7 @@ services:
       - "443:443" #HTTPS
     depends_on:
       - mysql
+    command: sh -c "npm install && npm run dev"
 
   # Serviço de aplicação MySQL
   mysql:
