@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 class Client extends Model
 {
@@ -23,48 +24,60 @@ class Client extends Model
         'name_social',
     ];
 
+
     /**
-     * > The `getDateOfBirthAttribute` function is called when you try to access the `date_of_birth` attribute
-     * of a `User` object
+     * This PHP function formats a date of birth string into a "dd/mm/yyyy" format.
      * 
-     * @param value The value of the attribute.
+     * @param value  is a nullable string parameter that represents the date of birth in the format
+     * 'Y-m-d' (e.g. '1990-01-01').
      * 
-     * @return The birth date of the user.
+     * @return ?string a formatted date string in the format of "dd/mm/yyyy" if the input value is not
+     * null, otherwise it returns null.
      */
-    public function getDateOfBirthAttribute($value)
+    public function getDateOfBirthAttribute(?string $value): ?string
     {
-        return date('d/m/Y', strtotime($value));
+        return $value ? date('d/m/Y', strtotime($value)) : null;
     }
 
     /**
-     * > The `setDateOfBirthAttribute` function is called when the `date_of_birth` attribute is set
+     * This function sets the date of birth attribute in a specific format.
      * 
-     * @param value The value of the attribute.
+     * @param string value The value parameter is a string representing a date of birth in any format.
      */
-    public function setDateOfBirthAttribute($value)
+    public function setDateOfBirthAttribute(string $value): void
     {
         $this->attributes['date_of_birth'] = date('Y-m-d', strtotime($value));
     }
 
     /**
-     * > The `getDocumentAttribute` function is called when you try to access the `document` attribute
-     * of a `User` object
+     * This PHP function formats a document attribute (such as a Brazilian CPF or CNPJ) into a standardized
+     * format.
      * 
-     * @param value The value of the attribute.
+     * @param value The input string that represents a document number (CPF or CNPJ). It can be null or
+     * empty.
      * 
-     * @return The document of the user.
+     * @return string a formatted string representing a document number (CPF or CNPJ) based on the input
+     * value. If the input value has 14 characters, it is assumed to be a CNPJ and the function formats it
+     * as "XX.XXX.XXX/XXXX-XX". If the input value has 11 characters, it is assumed to be a CPF and the
+     * function formats it as "XXX
      */
-    public function getDocumentAttribute($value)
+    public function getDocumentAttribute(?string $value = ''): string
     {
-        return preg_replace('/(\d{3})(\d{3})(\d{3})(\d{2})/', '$1.$2.$3-$4', $value);
+        $value = Str::of($value)->replace(['.', '-', '/'], '');
+
+        return strlen($value) == 14
+            ? preg_replace('/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/', '$1.$2.$3/$4-$5', $value)
+            : preg_replace('/(\d{3})(\d{3})(\d{3})(\d{2})/', '$1.$2.$3-$4', $value);
     }
 
     /**
-     * > The `setDocumentAttribute` function is called when the `document` attribute is set
+     * This PHP function sets the "document" attribute of an object by removing any non-numeric characters
+     * from the input value.
      * 
-     * @param value The value of the attribute.
+     * @param string value  is a string parameter representing the value to be set for the "document"
+     * attribute.
      */
-    public function setDocumentAttribute($value)
+    public function setDocumentAttribute(string $value): void
     {
         $this->attributes['document'] = preg_replace('/[^0-9]/', '', $value);
     }
