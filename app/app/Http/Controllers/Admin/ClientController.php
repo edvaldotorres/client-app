@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ClientRequest;
 use App\Models\Client;
 use App\Traits\UploadFile;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -70,15 +71,14 @@ class ClientController extends Controller
     }
 
     /**
-     * This PHP function stores client data and uploads an image if provided.
+     * This PHP function stores client data, validates it, uploads an image if provided, creates a new
+     * client, and redirects to the clients index page.
      * 
-     * @param ClientRequest request  is an instance of the ClientRequest class, which is a custom
-     * request class that extends the base Laravel request class. It contains the data submitted in the
-     * HTTP request made to the server, and it also performs validation on the data according to the rules
-     * defined in the rules() method of the ClientRequest
+     * @param ClientRequest request An instance of the ClientRequest class, which is a custom request class
+     * that extends the base Laravel request class. It contains the data submitted by the user in the form
+     * of a client creation request.
      * 
-     * @return RedirectResponse A `RedirectResponse` is being returned, which redirects the user to the
-     * clients index route after creating a new client.
+     * @return RedirectResponse A `RedirectResponse` is being returned.
      */
     public function store(ClientRequest $request): RedirectResponse
     {
@@ -90,6 +90,8 @@ class ClientController extends Controller
         }
 
         $this->client->create($validatedData);
+        Toastr::success('Cliente criado com sucesso!', 'Sucesso');
+
         return redirect()->route(self::CLIENTS_INDEX_ROUTE);
     }
 
@@ -125,16 +127,14 @@ class ClientController extends Controller
     }
 
     /**
-     * This PHP function updates a client's information, including their image if provided, and redirects
+     * This function updates a client's information, including their image, and returns a redirect response
      * to the clients index page.
      * 
-     * @param ClientRequest request  is an instance of the ClientRequest class, which is a custom
-     * request class that extends the base Laravel request class. It contains the data submitted by the
-     * client in the HTTP request and any validation rules that have been defined for the request.
-     * @param int id The parameter `` is an integer that represents the ID of the client that needs to
-     * be updated.
+     * @param ClientRequest request An instance of the ClientRequest class, which is used to validate and
+     * retrieve data from the HTTP request.
+     * @param int id The ID of the client that needs to be updated.
      * 
-     * @return RedirectResponse A `RedirectResponse` is being returned.
+     * @return RedirectResponse A RedirectResponse is being returned.
      */
     public function update(ClientRequest $request, int $id): RedirectResponse
     {
@@ -148,11 +148,14 @@ class ClientController extends Controller
         }
 
         $client->update($validatedData);
+        Toastr::success('Cliente atualizado com sucesso!', 'Sucesso');
+
         return redirect()->route(self::CLIENTS_INDEX_ROUTE);
     }
 
     /**
-     * This PHP function deletes a client and their associated image.
+     * This PHP function deletes a client and redirects to the clients index page while displaying a
+     * success message.
      * 
      * @param int id The parameter "id" is an integer that represents the unique identifier of the client
      * that needs to be deleted.
@@ -162,8 +165,9 @@ class ClientController extends Controller
     public function destroy(int $id): RedirectResponse
     {
         $client = $this->client->findOrFail($id);
-
         $client->delete();
+
+        Toastr::success('Cliente excluído com sucesso!', 'Sucesso');
         return redirect()->route(self::CLIENTS_INDEX_ROUTE);
     }
 }
