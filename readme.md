@@ -38,10 +38,14 @@ NOTE: This may take a while if this is the first time installing this as a conta
 4. Install the dependencies
 
 ```sh
-docker exec -it (container) /bin/bash
+docker exec -it client-app-php-fpm-1 /bin/bash
 ```
 
-NOTE: Create your database according to docker-compose.yml file & configure your .env file
+or
+
+```sh
+docker exec -it client-app-php-fpm-1 /sh
+```
 
 ```sh
 cd app
@@ -49,6 +53,14 @@ cd app
 
 ```sh
 composer intall
+```
+
+```sh
+npm install
+```
+
+```sh
+npm run build
 ```
 
 5. Build the migrate.
@@ -59,7 +71,7 @@ php artisan migrate
 
 ## Usage
 
-1. You can now open your application with platform: http://localhost
+1. You can now open your application with platform: http://localhost:8000/
 
 ## Author
 
