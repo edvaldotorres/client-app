@@ -54,6 +54,9 @@ cd app
 ```sh
 composer intall
 ```
+```sh
+php artisan storage:link
+```
 
 ```sh
 npm install
