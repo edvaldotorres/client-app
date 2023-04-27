@@ -10,7 +10,7 @@
   </a>
 </p>
 
-> Project boils down to customer crud! Where it follows good practices and RSP recommendations… its main objective is to improve the Laravel framework
+> This project is focused on creating a CRUD (Create, Read, Update, Delete) to manage customer information, following best practices and RSP recommendations. In addition, the project aims to improve the Laravel framework, through the implementation of new features and optimizations.
 
 ## Prerequisites
 
