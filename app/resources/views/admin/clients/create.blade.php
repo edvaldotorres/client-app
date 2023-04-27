@@ -22,7 +22,7 @@
                                 <div class="col-md-6">
                                     <label for="date_of_birth" class="form-label">Data de Nascimento:</label>
                                     <div class="input-group">
-                                        <input type="date" class="form-control" name="date_of_birth"
+                                        <input type="text" class="form-control mask-date_of_birth" name="date_of_birth"
                                             value="{{ old('date_of_birth') }}">
                                     </div>
                                     @error('date_of_birth')
@@ -75,5 +75,7 @@
                 $('#document').mask(mask, options);
             }
         });
+
+        $('.mask-date_of_birth').mask('00/00/0000');
     </script>
 @endsection

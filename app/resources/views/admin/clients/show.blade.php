@@ -17,7 +17,7 @@
                                 <div class="col-md-6">
                                     <label for="date_of_birth" class="form-label">Data de Nascimento:</label>
                                     <div class="input-group">
-                                        <input type="date" class="form-control" name="date_of_birth"
+                                        <input type="text" class="form-control" name="date_of_birth"
                                             value="{{ $client->date_of_birth }}" disabled>
                                     </div>
                                 </div>
